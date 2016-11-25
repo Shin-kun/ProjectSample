@@ -1,0 +1,35 @@
+<component name="libraryTable">
+  <library name="javadoc">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/slick/Pack200Task.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/slick/lib" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$USER_HOME$/Downloads/slick/javadoc" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+      <root url="file://$USER_HOME$/Downloads/slick" />
+    </NATIVE>
+    <SOURCES>
+      <root url="file://$USER_HOME$/Downloads/slick/src" />
+      <root url="file://$USER_HOME$/Downloads/slick/tools" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/slick/lib" recursive="false" />
+  </library>
+</component>

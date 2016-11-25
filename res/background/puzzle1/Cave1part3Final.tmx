@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="23" height="13" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="BrownCave" tilewidth="32" tileheight="32" tilecount="64" columns="8">
+  <image source="BrownCave.png" width="256" height="256"/>
+ </tileset>
+ <tileset firstgid="65" name="withSlantBorders" tilewidth="32" tileheight="32" tilecount="1050" columns="30">
+  <image source="withSlantBorders.jpg" width="960" height="1120"/>
+ </tileset>
+ <tileset firstgid="1115" name="Objects" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="Objects.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1371" name="de1bfc75fed88b89528121f18c837076" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="de1bfc75fed88b89528121f18c837076.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Background" width="23" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC7WTwQnAMAwDDR0lm3Xu0ln6KVQIW7ILeeiVk2ISeR0Ra7NOUodRrOIzz4RF/o5PlT9jmMds5NHHfiXkOLvyd7OZV3Or+1wuZrt3neZ2epNlXK/cv7uuu85UTHeXlG86r9qVP+c79QAELbgMrAQAAA==
+  </data>
+ </layer>
+ <layer name="Walls" width="23" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoD2IZ2ZgcIFid2bsahyB4k5AXAZkl0NxBR4zmYAYZFQtknmpOMwH2Z+AJj6NgPnYQCqSP2C4Fod/QOZPB+IZJNpBLNgKxNtoZDYMKOLwGzWAPZ3MFgJiYSRajJF6ZmMDuMz/A0ywf4H4HxN2+Sc4xAmZ/wdNH7r5xJoLA+LMECyBw59PmRCY3gAAiJSJgawEAAA=
+  </data>
+ </layer>
+ <layer name="Lilies" width="23" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGNrAgA0VU0MtsjwxetDVEKMWnz50eWRgyAbBhPxKKlBkQzWb2uaDAC6zjdhIx9jcDTOLEEBWg81cZDapZuPyFz7/kgoI6aXE7MEMAFUeLwesBAAA
+  </data>
+ </layer>
+ <layer name="Objects" width="23" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoAwo0EgtCGhQUS263QZEmFnGQpxaUtxJKsBntyQN7VUkQo0CGp9Y92gSoQY9TIlxz0oW4uyHhSlIvSQR7lEA4p1Emg0DIPXEuJnctENMGBKTxocSAAB6L2e7rAQAAA==
+  </data>
+ </layer>
+</map>

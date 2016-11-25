@@ -1,0 +1,207 @@
+package alptraum.puzzles.level1.level1;
+
+/**
+ * Created by Loewe on 11/21/2016.
+ */
+
+import alptraum.Camera;
+import alptraum.Hero;
+import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.tiled.TiledMap;
+
+public class Puzzle4 extends BasicGameState{
+    Animation hero,steady, movingUp, movingDown,movingRight, movingLeft;
+    int[] duration = {200,200,200}; // an animation is a series of frames(milliseconds)
+    int[] duration2 = {1000,100,100};
+    float heroPositionX = 1.5f;// keep track of position of hero
+    float heroPositionY = 9f;
+    Hero player;
+    Rectangle rHero;
+    private TiledMap cave4;
+    Camera camera;
+    private static final float SPEEDOBJ = 0.025f;
+    private boolean blocked[][];
+    private static final int TILESIZE = 32;
+    Image[] cakes;
+    Image[] swords;
+    Image[] meats;
+
+    private boolean up1, down1, up2, down2;
+    private static final int NUMBEROFLAYERS = 5;
+    private static final float SPEED = 0.00095f;
+
+    private float moveX1 = 6f, moveX2 = 7f, moveX3 = 8f, moveX4 = 9f,moveX5 = 10f,moveX6 = 11f,moveX7 = 12f,
+            moveX8 = 13f,moveX9 = 14f,moveX10 = 15f, moveX11 = 16f, moveX12 = 17f, moveX13 = 18f;
+    private float moveY = 2f;
+    private float moveY2 = 10f;
+
+    public Puzzle4(int state,Hero player) throws SlickException{
+        this.player = player;
+    }
+
+    private void initializeBlocked() {
+        for (int l = 0; l < NUMBEROFLAYERS; l++) {
+            String layerValue = cave4.getLayerProperty(l, "blocked", "false");
+            if (layerValue.equals("true")) {
+                for (int c = 0; c < cave4.getHeight(); c++) {
+                    for(int r = 0; r < cave4.getWidth(); r++) {
+                        if(cave4.getTileId(r, c, l) != 0) {
+                            blocked[r][c] = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isBlocked(float x, float y) {
+        if((x < 0 ) || x >= TILESIZE || y < 0 || y >= TILESIZE){
+            return true;
+        }
+        int xBlock = (int) x /* TILEWIDTH*/;
+        int yBlock = (int) y /* TILEHEIGHT*/;
+        System.out.println(xBlock + " mao ni si Xblock");
+        System.out.println(yBlock + " mao ni si yBlock");
+        System.out.println(blocked[xBlock][yBlock] + " mao ni ilang values");
+        return blocked[xBlock][yBlock];
+    }
+
+    @Override
+    public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        up1 = down2= false;
+        down1 = up2 = true;
+
+        swords = new Image[] {new Image("res/background/puzzle1/FOOD/Sword.png")};
+        cakes = new Image[] { new Image("res/background/puzzle1/FOOD/Cake.png")};
+        meats = new Image[] {new Image("res/background/puzzle1/FOOD/Meat.png")};
+
+        cave4 = new TiledMap("res/background/puzzle1/Cave3part2Final.tmx", "res/background/puzzle1");
+        blocked = new boolean[cave4.getWidth()][cave4.getHeight()];
+        initializeBlocked();
+
+        Image[] heroSteady = {new Image("res/characters/hero/0.png"),new Image("res/characters/hero/3.png"),new Image("res/characters/hero/4.png")};
+        Image[] walkUp = {new Image("res/characters/hero/2.png"),new Image("res/characters/hero/11.png"),new Image("res/characters/hero/12.png")};
+        Image[] walkLeft = {new Image("res/characters/hero/1.png"),new Image("res/characters/hero/9.png"),new Image("res/characters/hero/10.png")};
+        Image[] walkRight = {new Image("res/characters/hero/R1.png"),new Image("res/characters/hero/R2.png"),new Image("res/characters/hero/R3.png")};
+        Image[] walkDown = {new Image("res/characters/hero/0.png"),new Image("res/characters/hero/7.png"),new Image("res/characters/hero/8.png")};
+
+        movingRight = new Animation(walkRight,duration,true);
+        movingUp = new Animation(walkUp,duration,true);
+        movingLeft = new Animation(walkLeft,duration,true);
+        movingDown = new Animation(walkDown,duration,true);
+        steady = new Animation(heroSteady,duration2, true);
+        hero = steady;
+        camera = new Camera(container,cave4);
+    }
+
+    @Override
+    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+        camera.translateGraphics();
+        camera.drawMap(0);
+        camera.drawMap(1);
+        camera.drawMap(2);
+
+        hero.draw(heroPositionX * 32,heroPositionY * 32);
+        camera.drawMap(3);
+        camera.drawMap(4);
+
+        cakes[0].draw(moveX1 * 32, moveY * 32);
+        cakes[0].draw(moveX1 * 32, moveY2 * 32);
+        meats[0].draw(moveX13 * 32, moveY * 32);
+        swords[0].draw(moveX2 * 32, moveY * 32);
+        cakes[0].draw(moveX3 * 32, moveY * 32);
+        swords[0].draw(moveX4 * 32, moveY * 32);
+        swords[0].draw(moveX4 * 32, moveY2 * 32);
+        cakes[0].draw(moveX5 * 32, moveY2 * 32);
+        cakes[0].draw(moveX5 * 32, moveY * 32);
+        swords[0].draw(moveX6 * 32, moveY * 32);
+        meats[0].draw(moveX12 * 32, moveY * 32);
+        cakes[0].draw(moveX7 * 32, moveY * 32);
+        swords[0].draw(moveX8 * 32, moveY * 32);
+        cakes[0].draw(moveX9 * 32, moveY * 32);
+        meats[0].draw(moveX11 * 32, moveY * 32);
+        swords[0].draw(moveX10 * 32, moveY * 32);
+        cakes[0].draw(moveX10 * 32, moveY2 * 32);
+        swords[0].draw(moveX13 * 32, moveY * 32);
+        cakes[0].draw(moveX4 * 32, moveY2 * 32);
+        swords[0].draw(moveX9 * 32, moveY2 * 32);
+        swords[0].draw(moveX7 * 32, moveY2 * 32);
+        swords[0].draw(moveX6 * 32, moveY2 * 32);
+        swords[0].draw(moveX3 * 32, moveY2 * 32);
+
+
+        g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
+        g.drawString("HERO NAME: "+player.getName()+" ",100,100);
+    }
+
+    private void move(int delta){
+        if(down1 && (int) moveY != 11){
+            moveY += delta * SPEEDOBJ;
+            up1 = true;
+        } else if(up1 && (int) moveY != 1f){
+            moveY -= delta * SPEEDOBJ;
+            down1 = false;
+        } else {
+            down1 = true;
+        }
+        if(up2 && (int) moveY2 != 1f){
+            moveY2 -= delta *SPEEDOBJ;
+            down2 = true;
+        } else if(down2 && (int) moveY2 != 11f){
+            up2 = false;
+            moveY2 += delta * SPEEDOBJ;
+        } else {
+            up2 = true;
+        }
+    }
+
+    @Override
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        Input input = gc.getInput();
+        move(delta);
+        if (input.isKeyDown(Input.KEY_UP)) {
+            movingUp.update(delta);
+            hero = movingUp;
+            if(!isBlocked(heroPositionX, heroPositionY + delta * SPEED - 0.1f)){
+                heroPositionY -= delta * SPEED;
+            }
+        }
+        else if (input.isKeyDown(Input.KEY_DOWN)) {
+            movingDown.update(delta);
+            hero = movingDown;
+            if(!isBlocked(heroPositionX, heroPositionY + delta * SPEED + 0.1f)){
+                heroPositionY += delta * SPEED;
+            }
+        }
+        else if (input.isKeyDown(Input.KEY_LEFT)) {
+            movingLeft.update(delta);
+            hero = movingLeft;
+            if (!isBlocked(heroPositionX - delta * SPEED - 0.1f, heroPositionY )) {
+                heroPositionX -=  delta * SPEED;
+            }
+        }
+        else if (input.isKeyDown(Input.KEY_RIGHT)) {
+            movingRight.update(delta);
+            hero = movingRight;
+            if (!isBlocked(heroPositionX + delta * SPEED + 0.4f, heroPositionY)){
+                heroPositionX += delta * SPEED;
+            }
+        } else {
+            hero = steady;
+        }
+
+        if(!(input.isKeyDown(input.KEY_UP)) &&!( input.isKeyDown(input.KEY_DOWN)) &&!(input.isKeyDown(input.KEY_LEFT))&&!(input.isKeyDown(input.KEY_RIGHT))){
+            hero = steady;
+        }
+
+        if((int) heroPositionX == 0 && (heroPositionY > 8 && heroPositionY < 11))
+            sbg.enterState(9);
+    }
+
+    @Override
+    public int getID(){
+        return 10;
+    }
+}
