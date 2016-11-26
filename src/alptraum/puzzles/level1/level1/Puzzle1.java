@@ -18,6 +18,9 @@ package alptraum.puzzles.level1.level1;
         movingDown x = 18
                     y = 7
 
+    //TODO adding saving points
+
+
 **/
 //newly added function in hero is checkDamage please check
 import alptraum.Health;
@@ -48,7 +51,7 @@ public class Puzzle1 extends BasicGameState{
     Camera camera;
     //Health health;
     private boolean[][] blocked;
-    private static final int NUMBEROFLAYERS = 5;
+    private static final int NUMBEROFLAYERS = 6;
     private static final float SPEED = 0.0025f;
    //boolean moreleft,moreright,moreUp,moreDown;
     Rectangle rHero;
@@ -132,11 +135,12 @@ public class Puzzle1 extends BasicGameState{
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         camera.translateGraphics();
         camera.drawMap(0);
-        camera.drawMap(1);
         camera.drawMap(2);
-        camera.drawMap(4);
-        hero.draw(heroPositionX * TILEWIDTH, heroPositionY * TILEHEIGHT);
         camera.drawMap(3);
+        camera.drawMap(5);
+        hero.draw(heroPositionX * TILEWIDTH, heroPositionY * TILEHEIGHT);
+        camera.drawMap(4);
+
         swords.draw(swordMovementX * 32,swordMovementY * 32);
         swords.draw(swordMovementX1 * 32, swordMovementY1 * 32);
         swords.draw(swordMovementX2 * 32,swordMovementY2 * 32);
@@ -154,19 +158,6 @@ public class Puzzle1 extends BasicGameState{
             hp.draw(6 * TILEWIDTH,12 * TILEHEIGHT,20,15);
         if(player.getHp() == 5)
             hp.draw(7 * TILEWIDTH,12 * TILEHEIGHT,20,15);
-
-        /*wall1 = new Rectangle(19 * TILEWIDTH,7 * TILEHEIGHT,40,10);
-        wall2 = new Rectangle(13.6f * TILEWIDTH,8 * TILEHEIGHT,10,40);
-        wall3 = new Rectangle(10.3f * TILEWIDTH, 8 * TILEHEIGHT,10,40);
-        wall4 = new Rectangle(19 * TILEWIDTH,8 * TILEHEIGHT,40,10);
-        wall5 = new Rectangle(13 * TILEWIDTH, 4 * TILEHEIGHT, 10,50);
-        wall6 = new Rectangle(7 * TILEWIDTH, 8 * TILEHEIGHT, 10,40);
-        g.draw(wall1);
-        g.draw(wall2);
-        g.draw(wall3);
-        g.draw(wall4);
-        g.draw(wall5);
-        g.draw(wall6);*/
 
         weapon1 = new Rectangle(swordMovementX * 32, swordMovementY * 32, 25,25);
         weapon2 = new Rectangle(swordMovementX1 * 32, swordMovementY1 * 32,25,25);

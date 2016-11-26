@@ -110,6 +110,14 @@
    H4sIAAAAAAAAC7vDxMBwB4p3MqDiO0hy9gykY1zmYjObkB249NPT7M9QjGw+Pnfgchsuuc9YMClmD3U8Bw37MJNuhh0FZhMTl4+YEJhYs9mB/NtMCEzID4/ISFOkmk2s+ejpHJ89j7DkC1Iwchihy4HMBgB+U8qjrAQAAA==
   </data>
  </layer>
+ <layer name="Invisiblewalls" width="23" height="13">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYGiAGFbsbGoANRYEW5kFt7pRMHAAALWsW96sBAAA
+  </data>
+ </layer>
  <layer name="Wall2" width="23" height="13">
   <properties>
    <property name="blocked" type="bool" value="true"/>

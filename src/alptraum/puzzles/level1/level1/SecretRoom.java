@@ -18,22 +18,51 @@ public class SecretRoom extends BasicGameState{
     float heroPositionX = 2f;// keep track of position of hero
     float heroPositionY = 5f;
     Hero player;
-    Rectangle rHero;
+    Image hp;
     private TiledMap secretRoom;
     Camera camera;
 
-    private static final int NUMBEROFLAYERS = 5;
-    private static final float SPEED = 0.00095f;
-    boolean moreleft,moreright,moreUp,moreDown;
+    private boolean blocked[][];
+    private static final int NUMBEROFLAYERS = 4;
+    private static final float SPEED = 0.0025f;
+    private static final int TILESIZE = 32;
 
     public SecretRoom(int state,Hero player) throws SlickException {
         this.player = player;
     }
 
+    private void initializeBlocked() {
+        for (int l = 0; l < NUMBEROFLAYERS; l++) {
+            String layerValue = secretRoom.getLayerProperty(l, "blocked", "false");
+            if (layerValue.equals("true")) {
+                for (int c = 0; c < secretRoom.getHeight(); c++) {
+                    for(int r = 0; r < secretRoom.getWidth(); r++) {
+                        if(secretRoom.getTileId(r, c, l) != 0) {
+                            blocked[r][c] = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isBlocked(float x, float y) {
+        if((x < 0 ) || x >= TILESIZE || y < 0 || y >= TILESIZE){
+            return true;
+        }
+        int xBlock = (int) x /* TILEWIDTH*/;
+        int yBlock = (int) y /* TILEHEIGHT*/;
+        System.out.println(xBlock + " mao ni si Xblock");
+        System.out.println(yBlock + " mao ni si yBlock");
+        System.out.println(blocked[xBlock][yBlock] + " mao ni ilang values");
+        return blocked[xBlock][yBlock];
+    }
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         secretRoom = new TiledMap("res/background/puzzle1/Cave1Part3Final.tmx", "res/background/puzzle1");
+        blocked = new boolean[secretRoom.getWidth()][secretRoom.getHeight()];
+        initializeBlocked();
 
         Image[] heroSteady = {new Image("res/characters/hero/0.png"),new Image("res/characters/hero/3.png"),new Image("res/characters/hero/4.png")};
         Image[] walkUp = {new Image("res/characters/hero/2.png"),new Image("res/characters/hero/11.png"),new Image("res/characters/hero/12.png")};
@@ -60,6 +89,20 @@ public class SecretRoom extends BasicGameState{
         hero.draw(heroPositionX * 32,heroPositionY * 32);
         camera.drawMap(3);
 
+        if(player.getHp() >= 1)
+            hp.draw(3 * TILESIZE,12 * TILESIZE,20,15);
+        if(player.getHp() >= 2) {
+            hp.draw(4 * TILESIZE, 12 * TILESIZE, 20, 15);
+        }
+        if(player.getHp() >= 3)
+            hp.draw(5 * TILESIZE,12 * TILESIZE,20,15);
+        if(player.getHp() >= 4)
+            hp.draw(6 * TILESIZE,12 * TILESIZE,20,15);
+        if(player.getHp() == 5)
+            hp.draw(7 * TILESIZE,12 * TILESIZE,20,15);
+        g.drawString("Health: ", 1 * TILESIZE, 11.5f * TILESIZE);
+        g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
+
         g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
         g.drawString("HERO NAME: "+player.getName()+" ",100,100);
     }
@@ -68,48 +111,38 @@ public class SecretRoom extends BasicGameState{
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input input = gc.getInput();
         if (input.isKeyDown(Input.KEY_UP)) {
-            System.out.println(delta + " OH YEAH");
+            movingUp.update(delta);
             hero = movingUp;
-            //if(moreUp || !isBlocked(heroPositionX, heroPositionY)){
-
-            heroPositionY -= delta * SPEED;
-            /*} else {
-                moreDown = moreleft = moreright = true;
-            }*/
+            if(!isBlocked(heroPositionX, heroPositionY + delta * SPEED - 0.1f)){
+                heroPositionY -= delta * SPEED;
+            }
         }
         else if (input.isKeyDown(Input.KEY_DOWN)) {
+            movingDown.update(delta);
             hero = movingDown;
-            //if(moreDown || !isBlocked(heroPositionX, heroPositionY)) {
-            heroPositionY += delta * SPEED;
-            /*} else {
-                moreUp = moreleft = moreright = true;
-            }*/
+            if(!isBlocked(heroPositionX, heroPositionY + delta * SPEED + 0.1f)){
+                heroPositionY += delta * SPEED;
+            }
         }
         else if (input.isKeyDown(Input.KEY_LEFT)) {
+            movingLeft.update(delta);
             hero = movingLeft;
-            //if (moreleft || !isBlocked(heroPositionX  , heroPositionY )) {
-            heroPositionX -=  delta * SPEED;
-            /*} else {
-                moreDown = moreUp = moreright = true;
-            }*/
+            if (!isBlocked(heroPositionX - delta * SPEED - 0.1f, heroPositionY )) {
+                heroPositionX -=  delta * SPEED;
+            }
         }
         else if (input.isKeyDown(Input.KEY_RIGHT)) {
+            movingRight.update(delta);
             hero = movingRight;
-            //if (moreright || !isBlocked(heroPositionX, heroPositionY)){
-            heroPositionX += delta * SPEED;
-
-            /*} else {
-                moreleft = moreDown = moreUp = true;
-            }*/
-        } if(!(input.isKeyDown(input.KEY_UP)) &&!( input.isKeyDown(input.KEY_DOWN)) &&!(input.isKeyDown(input.KEY_LEFT))&&!(input.isKeyDown(input.KEY_RIGHT))){
+            if (!isBlocked(heroPositionX + delta * SPEED + 0.4f, heroPositionY)){
+                heroPositionX += delta * SPEED;
+            }
+        } else {
             hero = steady;
         }
-
-        if((int) heroPositionX == 0 && ((int) heroPositionY >= 2 && (int) heroPositionY <= 7)){
+        if ((int) heroPositionX == 0 && ((int) heroPositionY >= 2 && (int) heroPositionY <= 7)) {
             sbg.enterState(6);
         }
-
-
     }
 
     @Override

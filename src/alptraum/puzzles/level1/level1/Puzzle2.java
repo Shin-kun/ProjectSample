@@ -23,21 +23,19 @@ public class Puzzle2 extends BasicGameState{
     private static final int TILEWIDTH = 32;
     private static final int TILEHEIGHT = 32;
 
-    int[] duration = {200,200,200}; // an animation is a series of frames(milliseconds)
-    int[] duration2 = {1000,100,100};
+    private int[] duration = {200,200,200}; // an animation is a series of frames(milliseconds)
+    private int[] duration2 = {1000,100,100};
     private float heroPositionX = 5f;// keep track of position of hero
     private float heroPositionY = 11f;
     private  float heroW = 20.0f;
     private  float heroL = 27.0f;
-    boolean nowleft,nowright,nowUp,nowDown;
-
+    Rectangle weapon1, weapon2, weapon3, food1;
     Image hp;
     Image swords;
     Rectangle rHero;
     private TiledMap cave2;
     private static final int NUMBEROFLAYERS = 4;
     private static final float SPEED = 0.0025f;
-    boolean moreleft,moreright,moreUp,moreDown;
 
     Hero player;
     Camera camera;
@@ -48,7 +46,6 @@ public class Puzzle2 extends BasicGameState{
 
     private float sword1moveX = 19, sword2moveX = 3, sword3moveX = 10f;
     private float sword1moveY = 7, sword2moveY = 6, sword3moveY = 3f;
-
 
     public Puzzle2(int state, Hero player) throws SlickException{
         this.player = player;
@@ -61,10 +58,8 @@ public class Puzzle2 extends BasicGameState{
             if (layerValue.equals("true")) {
                 for (int c = 0; c < cave2.getHeight(); c++) {
                     for(int r = 0; r < cave2.getWidth(); r++) {
-                        //try{
                         if(cave2.getTileId(r, c, l) != 0) {
                             blocked[r][c] = true;
-                            //System.out.println("ok!");
                             numTiles++;
                         }
                     }
@@ -88,6 +83,12 @@ public class Puzzle2 extends BasicGameState{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        weapon1 = new Rectangle(0,0,0,0);
+        weapon2 = new Rectangle(0,0,0,0);
+        weapon3 = new Rectangle(0,0,0,0);
+        rHero = new Rectangle(15,0,heroW,heroL);
+
+
         cave2 = new TiledMap("res/background/puzzle1/cave1Final.tmx");
         blocked = new boolean[cave2.getWidth()][cave2.getHeight()];
         initializeBlocked();
@@ -95,8 +96,8 @@ public class Puzzle2 extends BasicGameState{
         diagdownright = diagdownleft = diagupleft = true;
         upmove = diagup1 = false;
         downmove = true;
-        cake1 = new Image("res/background/puzzle1/FOOD/Cake.png");
 
+        cake1 = new Image("res/background/puzzle1/FOOD/Cake.png");
         swords = new Image("res/background/puzzle1/FOOD/Sword.png");
         hp = new Image("res/background/puzzle1/FOOD/heart.png");
 
@@ -112,8 +113,6 @@ public class Puzzle2 extends BasicGameState{
         movingDown = new Animation(walkDown,duration,true);
         steady = new Animation(heroSteady,duration2, true);
         hero = steady;
-        nowleft = nowright = nowUp = nowDown = false;
-        moreDown = moreleft = moreright = moreUp = true;
         camera = new Camera(container,cave2);
     }
 
@@ -148,7 +147,17 @@ public class Puzzle2 extends BasicGameState{
         g.drawString("HEALTH: ", 1 * TILEWIDTH, 1 * TILEHEIGHT);
         g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
         g.drawString("HERO NAME: "+player.getName()+" ",100,100);
+
+        weapon1 = new Rectangle(sword1moveX * 32, sword1moveY * 32, 25,25);
+        weapon2 = new Rectangle(sword2moveX * 32, sword2moveY * 32,25,25);
+        weapon3 = new Rectangle(sword3moveX * 32, sword3moveY * 32,25,25);
         rHero = new Rectangle(heroPositionX * TILEWIDTH - 1,heroPositionY * TILEHEIGHT,heroW,heroL);
+        food1 = new Rectangle(12 * TILEWIDTH,6 * TILEHEIGHT,25,25);
+        g.draw(rHero);
+        g.draw(weapon1);
+        g.draw(weapon2);
+        g.draw(weapon3);
+        g.draw(food1);
     }
 
     private void swordmove(int delta){

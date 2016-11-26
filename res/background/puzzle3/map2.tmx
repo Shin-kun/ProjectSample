@@ -32,16 +32,25 @@
   </data>
  </layer>
  <layer name="Trees 1" width="23" height="13">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC1vPxMBwBYgvAvElIL4M5VMD7Aea8wSIHwLxIyB+DOVTA3wGmvMFiD8C8ScmBJ8a4DDQnCNUMgsdUDN80QE1wxcdUDN8R8EoIAcAAEG5KNesBAAA
   </data>
  </layer>
  <layer name="Trees 2" width="23" height="13">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC62TyQnAMAwEhftvKkcDORrI0UAcF+D1IyASCxSzAwN+WHosK5EvWxDZ4QHPUPnwY6bDu4cDHOEFI7xhcu62Zia8Z7jA1bnLS0sGXloysND5stH5stH5Pt1gofNldePd4wKrG7UeM7pRYPaYccsWnlvOXvrmrKwEAAA=
   </data>
  </layer>
  <layer name="Trees 3" width="23" height="13">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC62USQ7CMAxFo97/DPQEDCcAMQjWhRbYMgjWDAfoi9RIVmScQvjS2+Q7lvzlxDlbp8K5M1zgWqT9OQygVGqlt4IHPOEFb6U+9ocwgrFSK72J4qfk55jC7MOMwdMySEnO4TNYw6ZnBt+o4f4eDnDM7BXLZ3CD+48ZWPpnBl7WDubK2sFcyT1bwLLbkZTidxXOZA+Z8RZ2UPforb2ryuhh/RXWvKHe+m9aQ4axfKwEAAA=
   </data>

@@ -26,7 +26,7 @@ public class Game extends StateBasedGame{
     public static final int PUZZLE5 = 12;
     public static final int PUZZLE6 = 13;
     public static final int PUZZLE7 = 14;
-    //public static final int TESTING = 12;
+    public static final int PUZZLE8 = 15;
 
     private Hero character;
 
@@ -49,17 +49,18 @@ public class Game extends StateBasedGame{
         this.addState(new Puzzle5(PUZZLE5,character));
         this.addState(new Puzzle6(PUZZLE6,character));
         this.addState(new Puzzle7(PUZZLE7,character));
+        this.addState(new Puzzle8(PUZZLE8,character));
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException { //needed by StateBasedGame //GameContainer is responsible for the frame rate, input system, main game loop, etc.
         //need to give a background
-        this.getState(MENU).init(gc,this);
-        this.getState(PLAY).init(gc,this);
-        this.getState(REALWORLD).init(gc,this);
-        this.getState(HOUSE1).init(gc,this);
-        this.getState(HOUSE2).init(gc,this);
-        this.getState(HOUSE3).init(gc,this);
+        //this.getState(MENU).init(gc,this);
+        //this.getState(PLAY).init(gc,this);
+        //this.getState(REALWORLD).init(gc,this);
+        //this.getState(HOUSE1).init(gc,this);
+        //this.getState(HOUSE2).init(gc,this);
+        //this.getState(HOUSE3).init(gc,this);
         this.getState(PUZZLE1).init(gc,this);
         this.getState(PUZZLE2).init(gc,this);
         this.getState(PUZZLE3).init(gc,this);
@@ -68,7 +69,9 @@ public class Game extends StateBasedGame{
         //this.getState(TESTING).init(gc,this);
         this.getState(PATH1).init(gc,this);
         this.getState(SECROOM).init(gc,this);
-        this.enterState(PATH1);          //first needed to show
+        this.getState(PUZZLE7).init(gc,this);
+        this.getState(PUZZLE8).init(gc,this);
+        this.enterState(PUZZLE1);          //first needed to show
     }
 
     public static void main(String[] args){

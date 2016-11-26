@@ -12,14 +12,28 @@
  <tileset firstgid="1371" name="de1bfc75fed88b89528121f18c837076" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="de1bfc75fed88b89528121f18c837076.png" width="512" height="512"/>
  </tileset>
+ <tileset firstgid="1627" name="uppertile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="uppertile.png" width="37" height="33"/>
+ </tileset>
  <layer name="Background" width="23" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC7WTwQnAMAwDDR0lm3Xu0ln6KVQIW7ILeeiVk2ISeR0Ra7NOUodRrOIzz4RF/o5PlT9jmMds5NHHfiXkOLvyd7OZV3Or+1wuZrt3neZ2epNlXK/cv7uuu85UTHeXlG86r9qVP+c79QAELbgMrAQAAA==
+   H4sIAAAAAAAAC7WTwQ3AIAwDIzEKm3WvblZ1ln4qYVmJkyDxuBdngyDMYTYPcxEVR7nK9zIdF/3XFlHec9jHbvQxx3kFetwd5avd7Ktzq/2yXuzO7rXbW5kbr+P5yd49m/VsZiKn+pdUrnte5rbFzvpJPkZLHu2sBAAA
+  </data>
+ </layer>
+ <layer name="InvWall" width="23" height="13">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGB7gJxQTK49PLbqanwy4zSdkL7EAlxnUMHuwAVr5idg4RY5XbPpxxTOxbiCU1ijx/08G/OkR2fzhlnYA4No8P6wEAAA=
   </data>
  </layer>
  <layer name="Walls" width="23" height="13">
+  <properties>
+   <property name="blocked " type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoD2IZ2ZgcIFid2bsahyB4k5AXAZkl0NxBR4zmYAYZFQtknmpOMwH2Z+AJj6NgPnYQCqSP2C4Fod/QOZPB+IZJNpBLNgKxNtoZDYMKOLwGzWAPZ3MFgJiYSRajJF6ZmMDuMz/A0ywf4H4HxN2+Sc4xAmZ/wdNH7r5xJoLA+LMECyBw59PmRCY3gAAiJSJgawEAAA=
+   H4sIAAAAAAAAC2NgoD2IZ2ZgcIFid2bsahyB4k5AXAZkl0NxBR4zmYAYZFQtknmpOMwH2Z+AJj6NgPnYQCqSP2C4Fod/QOZPB+IZJNqBD/xEYm8F4m00MhsGFHH4jRpm2yOZHc2GiqlpNjoQY8RvHrL9pJqNz/w/wAT7F4j/MWGXf4JDHJv5yGH1B00fyHxkeWLNHQoAAIRzzUasBAAA
   </data>
  </layer>
  <layer name="Lilies" width="23" height="13">

@@ -24,13 +24,13 @@ public class Puzzle4 extends BasicGameState{
     private static final float SPEEDOBJ = 0.025f;
     private boolean blocked[][];
     private static final int TILESIZE = 32;
-    Image[] cakes;
-    Image[] swords;
-    Image[] meats;
-
+    Image cakes;
+    Image swords;
+    Image meats;
+    Image hp;
     private boolean up1, down1, up2, down2;
     private static final int NUMBEROFLAYERS = 5;
-    private static final float SPEED = 0.00095f;
+    private static final float SPEED = 0.0025f;
 
     private float moveX1 = 6f, moveX2 = 7f, moveX3 = 8f, moveX4 = 9f,moveX5 = 10f,moveX6 = 11f,moveX7 = 12f,
             moveX8 = 13f,moveX9 = 14f,moveX10 = 15f, moveX11 = 16f, moveX12 = 17f, moveX13 = 18f;
@@ -72,10 +72,10 @@ public class Puzzle4 extends BasicGameState{
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         up1 = down2= false;
         down1 = up2 = true;
-
-        swords = new Image[] {new Image("res/background/puzzle1/FOOD/Sword.png")};
-        cakes = new Image[] { new Image("res/background/puzzle1/FOOD/Cake.png")};
-        meats = new Image[] {new Image("res/background/puzzle1/FOOD/Meat.png")};
+        hp = new Image("res/background/puzzle1/FOOD/heart.png");
+        swords = new Image("res/background/puzzle1/FOOD/Sword.png");
+        cakes = new Image("res/background/puzzle1/FOOD/Cake.png");
+        meats = new Image("res/background/puzzle1/FOOD/Meat.png");
 
         cave4 = new TiledMap("res/background/puzzle1/Cave3part2Final.tmx", "res/background/puzzle1");
         blocked = new boolean[cave4.getWidth()][cave4.getHeight()];
@@ -107,31 +107,42 @@ public class Puzzle4 extends BasicGameState{
         camera.drawMap(3);
         camera.drawMap(4);
 
-        cakes[0].draw(moveX1 * 32, moveY * 32);
-        cakes[0].draw(moveX1 * 32, moveY2 * 32);
-        meats[0].draw(moveX13 * 32, moveY * 32);
-        swords[0].draw(moveX2 * 32, moveY * 32);
-        cakes[0].draw(moveX3 * 32, moveY * 32);
-        swords[0].draw(moveX4 * 32, moveY * 32);
-        swords[0].draw(moveX4 * 32, moveY2 * 32);
-        cakes[0].draw(moveX5 * 32, moveY2 * 32);
-        cakes[0].draw(moveX5 * 32, moveY * 32);
-        swords[0].draw(moveX6 * 32, moveY * 32);
-        meats[0].draw(moveX12 * 32, moveY * 32);
-        cakes[0].draw(moveX7 * 32, moveY * 32);
-        swords[0].draw(moveX8 * 32, moveY * 32);
-        cakes[0].draw(moveX9 * 32, moveY * 32);
-        meats[0].draw(moveX11 * 32, moveY * 32);
-        swords[0].draw(moveX10 * 32, moveY * 32);
-        cakes[0].draw(moveX10 * 32, moveY2 * 32);
-        swords[0].draw(moveX13 * 32, moveY * 32);
-        cakes[0].draw(moveX4 * 32, moveY2 * 32);
-        swords[0].draw(moveX9 * 32, moveY2 * 32);
-        swords[0].draw(moveX7 * 32, moveY2 * 32);
-        swords[0].draw(moveX6 * 32, moveY2 * 32);
-        swords[0].draw(moveX3 * 32, moveY2 * 32);
+        cakes.draw(moveX1 * 32, moveY * 32);
+        cakes.draw(moveX1 * 32, moveY2 * 32);
+        meats.draw(moveX13 * 32, moveY * 32);
+        swords.draw(moveX2 * 32, moveY * 32);
+        cakes.draw(moveX3 * 32, moveY * 32);
+        swords.draw(moveX4 * 32, moveY * 32);
+        swords.draw(moveX4 * 32, moveY2 * 32);
+        cakes.draw(moveX5 * 32, moveY2 * 32);
+        cakes.draw(moveX5 * 32, moveY * 32);
+        swords.draw(moveX6 * 32, moveY * 32);
+        meats.draw(moveX12 * 32, moveY * 32);
+        cakes.draw(moveX7 * 32, moveY * 32);
+        swords.draw(moveX8 * 32, moveY * 32);
+        cakes.draw(moveX9 * 32, moveY * 32);
+        meats.draw(moveX11 * 32, moveY * 32);
+        swords.draw(moveX10 * 32, moveY * 32);
+        cakes.draw(moveX10 * 32, moveY2 * 32);
+        swords.draw(moveX13 * 32, moveY * 32);
+        cakes.draw(moveX4 * 32, moveY2 * 32);
+        swords.draw(moveX9 * 32, moveY2 * 32);
+        swords.draw(moveX7 * 32, moveY2 * 32);
+        swords.draw(moveX6 * 32, moveY2 * 32);
+        swords.draw(moveX3 * 32, moveY2 * 32);
 
-
+        if(player.getHp() >= 1)
+            hp.draw(3 * TILESIZE,12 * TILESIZE,20,15);
+        if(player.getHp() >= 2) {
+            hp.draw(4 * TILESIZE, 12 * TILESIZE, 20, 15);
+        }
+        if(player.getHp() >= 3)
+            hp.draw(5 * TILESIZE,12 * TILESIZE,20,15);
+        if(player.getHp() >= 4)
+            hp.draw(6 * TILESIZE,12 * TILESIZE,20,15);
+        if(player.getHp() == 5)
+            hp.draw(7 * TILESIZE,12 * TILESIZE,20,15);
+        g.drawString("Health: ", 1 * TILESIZE, 11.5f * TILESIZE);
         g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
         g.drawString("HERO NAME: "+player.getName()+" ",100,100);
     }
