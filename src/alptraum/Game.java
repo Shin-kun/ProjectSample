@@ -71,7 +71,7 @@ public class Game extends StateBasedGame{
         this.getState(SECROOM).init(gc,this);
         this.getState(PUZZLE7).init(gc,this);
         this.getState(PUZZLE8).init(gc,this);
-        this.enterState(PUZZLE1);          //first needed to show
+        this.enterState(PUZZLE5);          //first needed to show
     }
 
     public static void main(String[] args){

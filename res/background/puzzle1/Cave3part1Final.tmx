@@ -2,6 +2,11 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="23" height="13" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="BrownCave" tilewidth="32" tileheight="32" tilecount="64" columns="8">
   <image source="BrownCave.png" width="256" height="256"/>
+  <tile id="8">
+   <properties>
+    <property name="blocked" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="65" name="Objects" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="Objects.png" width="512" height="512"/>
@@ -12,7 +17,7 @@
  <tileset firstgid="1371" name="uppertile" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="uppertile.png" width="37" height="33"/>
  </tileset>
- <layer name="Background" width="23" height="13">
+ <layer name="Background" width="23" height="13" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC7WTAQqAIAxFF3YtzyIeejeoW0iUkPBZX11Egw8i29v407yIZIfSKhJvqRHeJTiz2gg1PanJYf0be8Sxs7LeloHsEkSO0Of1xNjbxdnD01fLHe0AZ8HaXj7zYsRHnk7Y1hfvLOiR56152Mx/rydVheylqQaya3g80QkX+XHCZbN7/uwb/cnGv/eFcwJ7mAYYrAQAAA==
   </data>
@@ -22,10 +27,10 @@
    <property name="blocked" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WSQQ6DIBBFESimCbbGhV7Gm7jrzbrprbyK6ZBq/JnMQHXnT14k4jxgxJj/EgjLcERNvKqdAHNSrRMcD2XNJ/Gxu4N/1xBz9eNMUp03cv2dGIievZ9ueTARxsnVCWtgtrNqwb1EZay5sZdSmgNu3Mvoy37cyxt6rbnD+sT/ksZtwY2R3Nt94e5BcaQsLjPJwnuS86Kf3xsp/Jxa787kKu4vkYQfOawEAAA=
+   H4sIAAAAAAAAC9WSTQqDMBCFo9FIwZ/ShR6uu97MjbfyKuKEIj4eM4l11wcfhMR8mYxx7lqCUBJeaIRPcRJgTdvrFUdvnDkIS3k6+LtOWIsvdxL3VU7f/xAmYaT5d50G08I4ul7KGZjjrlawltYYW+6cv/vBzbXk/FjLDL223EGZi//omXFjNPfxXjiT4YjZfGKRwj1JedHP70YL39Pq3Z38i3sHDXshmqwEAAA=
   </data>
  </layer>
- <layer name="Wall2" width="23" height="13">
+ <layer name="Wall2" width="23" height="13" visible="0">
   <properties>
    <property name="blocked" type="bool" value="true"/>
   </properties>
@@ -33,19 +38,30 @@
    H4sIAAAAAAAAC2NgoC5go7J5yICPBmZy0sDMUbMHxmx6gCfMQ8vc4QQA9LbOwqwEAAA=
   </data>
  </layer>
- <layer name="Objects" width="23" height="13">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NggAApIJZmIB1sY2RgUICyFXCoUQJiZTLMBgENNBodaAGxNplmG6DR9ATpA2CnHBDLU8kNCmh8NSBWp8A8ZACL634orQfE+lQyGxbX8ykwYyDiDh0MBjfQGwAA+EHL+awEAAA=
-  </data>
- </layer>
  <layer name="Plants" width="23" height="13">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgQIDFDPgBujwu9bjUEat/FNAG0Dq8aWU+Nc0dTXNDFwAAV9/uS6wEAAA=
+   H4sIAAAAAAAAC2NgQIDFDPgBujwu9bjUEat/FNAG0DK8+WloPjXNHU1zQxcAAFzHl1qsBAAA
   </data>
  </layer>
  <layer name="InvisibleWall" width="23" height="13">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAXUBNGstDObk3ZGj4JRMOgBALcXfDusBAAA
+   H4sIAAAAAAAAC2NgGAXUBNGs5OvlISDPSb7RNAOU+JcQIBQelLiBFD209OMoIB4AAHdHMH2sBAAA
+  </data>
+ </layer>
+ <layer name="Objects" width="23" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NggAApIJZmIB1sY2RgUICyFXCoUQJiZTLMBgENNBodaAGxNplmG6DR9ATpdLaPH4jlgFieSm5QQOOrAbE6BeYhA1hc90NpPSDWp5LZsLieT4EZ9I47bGAwuIHeAABzBs9ArAQAAA==
+  </data>
+ </layer>
+ <layer name="InvisibleWall2" width="23" height="13">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYHACzkFgNi3dQA/zhxMAALcvr2qsBAAA
   </data>
  </layer>
 </map>

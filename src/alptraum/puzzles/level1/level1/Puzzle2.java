@@ -131,6 +131,12 @@ public class Puzzle2 extends BasicGameState{
         swords.draw(sword3moveX * 32, sword3moveY * 32);
         cake1.draw(12 * TILEWIDTH,6 * TILEHEIGHT,25,25);
 
+        weapon1 = new Rectangle(sword1moveX * 32, sword1moveY * 32, 25,25);
+        weapon2 = new Rectangle(sword2moveX * 32, sword2moveY * 32,25,25);
+        weapon3 = new Rectangle(sword3moveX * 32, sword3moveY * 32,25,25);
+        rHero = new Rectangle(heroPositionX * TILEWIDTH - 1,heroPositionY * TILEHEIGHT,heroW,heroL);
+        food1 = new Rectangle(12 * TILEWIDTH,6 * TILEHEIGHT,25,25);
+
         if(player.getHp() == 5)
             hp.draw(3 * TILEWIDTH,1 * TILEHEIGHT,20,15);
         if(player.getHp() >= 4) {
@@ -144,15 +150,12 @@ public class Puzzle2 extends BasicGameState{
         if(player.getHp() >= 1)
             hp.draw(7 * TILEWIDTH,1 * TILEHEIGHT,20,15);
 
+
+
         g.drawString("HEALTH: ", 1 * TILEWIDTH, 1 * TILEHEIGHT);
         g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
         g.drawString("HERO NAME: "+player.getName()+" ",100,100);
 
-        weapon1 = new Rectangle(sword1moveX * 32, sword1moveY * 32, 25,25);
-        weapon2 = new Rectangle(sword2moveX * 32, sword2moveY * 32,25,25);
-        weapon3 = new Rectangle(sword3moveX * 32, sword3moveY * 32,25,25);
-        rHero = new Rectangle(heroPositionX * TILEWIDTH - 1,heroPositionY * TILEHEIGHT,heroW,heroL);
-        food1 = new Rectangle(12 * TILEWIDTH,6 * TILEHEIGHT,25,25);
         g.draw(rHero);
         g.draw(weapon1);
         g.draw(weapon2);

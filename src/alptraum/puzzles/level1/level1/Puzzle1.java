@@ -147,6 +147,11 @@ public class Puzzle1 extends BasicGameState{
         swords.draw(swordMovementX3 * 32,swordMovementY3 * 32);
         //player HP
 
+        weapon1 = new Rectangle(swordMovementX * 32, swordMovementY * 32, 25,25);
+        weapon2 = new Rectangle(swordMovementX1 * 32, swordMovementY1 * 32,25,25);
+        weapon3 = new Rectangle(swordMovementX2 * 32, swordMovementY2 * 32,25,25);
+        weapon4 = new Rectangle(swordMovementX3 * 32, swordMovementY3 * 32,25,25);
+
         if(player.getHp() >= 1)
             hp.draw(3 * TILEWIDTH,12 * TILEHEIGHT,20,15);
         if(player.getHp() >= 2) {
@@ -158,11 +163,6 @@ public class Puzzle1 extends BasicGameState{
             hp.draw(6 * TILEWIDTH,12 * TILEHEIGHT,20,15);
         if(player.getHp() == 5)
             hp.draw(7 * TILEWIDTH,12 * TILEHEIGHT,20,15);
-
-        weapon1 = new Rectangle(swordMovementX * 32, swordMovementY * 32, 25,25);
-        weapon2 = new Rectangle(swordMovementX1 * 32, swordMovementY1 * 32,25,25);
-        weapon3 = new Rectangle(swordMovementX2 * 32, swordMovementY2 * 32,25,25);
-        weapon4 = new Rectangle(swordMovementX3 * 32, swordMovementY3 * 32,25,25);
 
         g.draw(weapon1);
         g.draw(weapon2);

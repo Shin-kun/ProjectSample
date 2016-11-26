@@ -23,7 +23,7 @@ public class Path extends BasicGameState{
     private TiledMap cave3;
     Camera camera;
 
-    private static final int NUMBEROFLAYERS = 5;
+    private static final int NUMBEROFLAYERS = 7;
     private static final float SPEED = 0.0025f;
     private static final int TILESIZE = 32;
     private boolean[][] blocked;
@@ -89,7 +89,7 @@ public class Path extends BasicGameState{
         camera.drawMap(2);
         hero.draw(heroPositionX * 32,heroPositionY * 32);
         camera.drawMap(3);
-        camera.drawMap(4);
+        camera.drawMap(5);
         //x = 9
         //y = 11;
         g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);

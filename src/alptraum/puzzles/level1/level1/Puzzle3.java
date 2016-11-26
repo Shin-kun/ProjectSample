@@ -36,9 +36,14 @@ public class Puzzle3 extends BasicGameState {
     private float meat1Y = 4f, meat2Y = 6f, meat3Y = 3f, meat4Y = 3f, meat5Y = 8f;
     private float cake1X = 14f;
     private float cake1Y = 3f;
+    private  float heroW = 20.0f;
+    private  float heroL = 27.0f;
+    private Rectangle meat1,meat2,meat3,meat4,meat5,cake;
 
-    boolean diagup1, diagdown1,diagdown2,diagup2;
-    boolean up1,down1, up2,down2;
+    // Rectangles in order to determine whether the character hits them or not
+
+    private boolean diagup1, diagdown1,diagdown2,diagup2;
+    private boolean up1,down1, up2,down2;
 
     public Puzzle3(int state,Hero player) throws SlickException{
         this.player = player;
@@ -73,6 +78,14 @@ public class Puzzle3 extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        meat1 = new Rectangle(0,0,0,0);
+        meat2 = new Rectangle(0,0,0,0);
+        meat3 = new Rectangle(0,0,0,0);
+        meat4 = new Rectangle(0,0,0,0);
+        meat5 = new Rectangle(0,0,0,0);
+        cake = new Rectangle(0,0,0,0);
+
+        rHero = new Rectangle(0,15,0,0);
         cave3 = new TiledMap("res/background/puzzle1/Cave2Part1Final.tmx", "res/background/puzzle1");
         blocked = new boolean[cave3.getWidth()][cave3.getHeight()];
         initializeBlocked();
@@ -115,6 +128,22 @@ public class Puzzle3 extends BasicGameState {
         g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
         g.drawString("HERO NAME: "+player.getName()+" ",100,100);
         g.drawString("HEALTH: ", 1 * TILESIZE, 11.8f * TILESIZE);
+
+        meat1 = new Rectangle(meat1X * 32, meat1Y * 32,25,25);
+        meat2 = new Rectangle(meat2X * 32, meat2Y * 32,25,25);
+        meat3 = new Rectangle(meat3X * 32, meat3Y * 32,25,25);
+        meat4 = new Rectangle(meat4X * 32, meat4Y * 32,25,25);
+        meat5 = new Rectangle(meat5X * 32, meat5Y * 32,25,25);
+        cake = new Rectangle(cake1X * 32, cake1Y * 32,25,25);
+        rHero = new Rectangle(heroPositionX * TILESIZE - 1,heroPositionY * TILESIZE,heroW,heroL);
+
+        g.draw(meat1);
+        g.draw(meat2);
+        g.draw(meat3);
+        g.draw(meat4);
+        g.draw(meat5);
+        g.draw(cake);
+        g.draw(rHero);
 
         if(player.getHp() >= 1)
             hp.draw(3 * TILESIZE,12 * TILESIZE,20,15);
