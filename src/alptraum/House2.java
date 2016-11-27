@@ -227,11 +227,11 @@ public class House2 extends BasicGameState{
         char2.draw(char2PositionX,char2PositionY,heroW,heroL+6);
         hero.draw(shiftX,shiftY,heroW,heroL);
 
-        g.drawString("hero X position: "+shiftX+"\nhero Y position: "+shiftY,400,200);
-        g.drawString("HERO NAME: "+player.getName()+" ",100,100);
+        //g.drawString("hero X position: "+shiftX+"\nhero Y position: "+shiftY,400,200);
+        //g.drawString("HERO NAME: "+player.getName()+" ",100,100);
         g.drawString("QUEST COUNTER: "+player.getCurrentQuest() +" ",300,300);
         rHero = new Rectangle(shiftX,shiftY,heroW,heroL);
-        g.draw(rHero);
+        /*g.draw(rHero);
         g.draw(rChar2);
 
         g.draw(wall1);
@@ -239,7 +239,7 @@ public class House2 extends BasicGameState{
         g.draw(transportRealWorld);
         g.draw(container1);
         g.draw(container2);
-        g.draw(pot1);
+        g.draw(pot1);*/
         if(interaction){
             textbox.draw(0,295,720,100);
             ttf.drawString(28.0f,310.83f,bFury.Interact(2),Color.black);

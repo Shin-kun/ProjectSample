@@ -127,10 +127,10 @@ public class RealWorld extends BasicGameState{
         realWorld.draw(heroPositionX-500,heroPositionY-1000,2.5f);
         hero.draw(shiftX,shiftY,heroW,heroL);
 
-        g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
+        //g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
         g.drawString("QUEST COUNTER: "+player.getCurrentQuest()+" ",300,300);
         rHero = new Rectangle(shiftX,shiftY,heroW,heroL);
-        g.draw(rHero);
+        //g.draw(rHero);
         if(player.subquests[0]) {
             g.drawString("quest1 complete \n", 200, 200);
         }
@@ -184,7 +184,7 @@ public class RealWorld extends BasicGameState{
         treetop2.draw(heroPositionX+418.89f,heroPositionY+911.20f,150,160);
         housetop.draw(heroPositionX+12.89f,heroPositionY+311.20f,318.5f,205.5f);
 
-        g.draw(wallLeft);
+        /*g.draw(wallLeft);
         g.draw(wallRight);
         g.draw(squareFence);
 
@@ -206,15 +206,15 @@ public class RealWorld extends BasicGameState{
         g.draw(rFlower3);
         g.draw(rFlower4);
         g.draw(rFlower5);
-        g.draw(rFlower6);
+        g.draw(rFlower6);*/
 
-        g.draw(rFlute);
+        //g.draw(rFlute);
 
-        g.draw(house4Right);
-        g.draw(house4Left);
+        //g.draw(house4Right);
+        //g.draw(house4Left);
 
-        g.draw(squareFence);
-        g.drawString("HERO NAME: "+player.getName()+" ",100,100);
+        //g.draw(squareFence);
+        //g.drawString("HERO NAME: "+player.getName()+" ",100,100);
 
         if(interaction && collidesanything()) {
             textbox.draw(0,295,720,100);
@@ -275,29 +275,33 @@ public class RealWorld extends BasicGameState{
         if(!interaction) {
             if (input.isKeyDown(input.KEY_UP)) {//TODO IBALIK SILA UG 1.5
                 direction = 1;
+                movingUp.update(delta);
                 hero = movingUp;
-                heroPositionY += 0.3f;
+                heroPositionY += delta * 0.095f;
            /*if(heroPositionY > 401.12 ||!moreUp){
                 heroPositionY -= 0.3f;
             }*/
             } else if (input.isKeyDown(input.KEY_DOWN)) {
                 direction = 3;
+                movingDown.update(delta);
                 hero = movingDown;
-                heroPositionY -= 0.3f;
+                heroPositionY -= delta * 0.095f;
             /*if(heroPositionY < -705.17 || !moreDown){
                 heroPositionY += 0.3f;
             }*/
             } else if (input.isKeyDown(input.KEY_RIGHT)) {
                 direction = 2;
+                movingRight.update(delta);
                 hero = movingRight;
-                heroPositionX -= 0.3f;
+                heroPositionX -= delta * 0.095f;
             /*if(heroPositionX < -732.32 ||!moreRight){
                 heroPositionX += 0.3f;
             }*/
             } else if (input.isKeyDown(input.KEY_LEFT)) {
                 direction = 4;
+                movingLeft.update(delta);
                 hero = movingLeft;
-                heroPositionX += 0.3f;
+                heroPositionX += delta * 0.095f;
             /*if(heroPositionX > 382.61 || !moreLeft){
                 heroPositionX -= 0.3f;
             }*/

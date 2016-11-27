@@ -62,11 +62,15 @@ public abstract class Character {
         this.images = images;
     }
 
+    public int getMessages(){ return ctrMessages; }
+    public void addMessage(){ ctrMessages++; }
+    public void setCtrMessages(int i){ ctrMessages = i; }
+
     int ctrImage;
     String name;
 
-    public Character(){
-    }
+    public Character(){ }
+
     public Character(String name){
         this.name = name;
         this.messages = null;
@@ -74,6 +78,7 @@ public abstract class Character {
         reputation = 0.0f;
         x = y = ctrImage = ctrMessages = 0;
     }
+
     public Character(String name, String[] messages){
         this.name = name;
         this.messages = messages;

@@ -1,183 +1,5 @@
 package alptraum;
 
-/*
-import org.newdawn.slick.*;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.*;
-*/
-/*else if((rHero.intersects(rock2) && rHero.intersects(rock3)) || (rHero.intersects(rock3) && rHero.intersects(rock4)) ||
-                (rHero.intersects(rock5) && rHero.intersects(rock6))) {
-            heroPositionX += 2.2;
-            heroPositionY += 2;
-            moreUp = false;
-            moreleft = false;
-
-        }*//*
-
-
-//shell of a screen: Const, init,render,update, return ID
-public class House1 extends BasicGameState{
-    Animation hero,steady, movingUp, movingDown,movingRight, movingLeft;
-    Image house1;
-    int[] duration = {200,200,200}; // an animation is a series of frames(milliseconds)
-    int[] duration2 = {1000,100,100};
-    float heroPositionX = 0;// keep track of position of hero
-    float heroPositionY = 0;
-    float heroW = 30.0f;
-    float heroL = 45.0f;
-    float shiftX = heroPositionX + 346.93f;
-    float shiftY = heroPositionY + 312.79f;
-
-    Hero player;
-
-    Rectangle rHero;
-
-    boolean moreLeft, moreRight,moreUp,moreDown;
-
-    Rectangle transportRealWorld,bed1,bed2,cabinet,shelf,table1,table2,pot1,pot2,window1,window2,window3,window4;
-
-
-    public House1(int state,Hero player)throws SlickException{
-        this.player = player;
-    }
-
-    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        //player.setName("Mike Gwapo Kaayu");
-
-        house1 = new Image("res/background/house1.png");
-        rHero = new Rectangle(shiftX,shiftY,heroW,heroL);
-
-        Image[] heroSteady = {new Image("res/characters/hero/0.png"),new Image("res/characters/hero/3.png"),new Image("res/characters/hero/4.png")};
-        Image[] walkUp = {new Image("res/characters/hero/2.png"),new Image("res/characters/hero/11.png"),new Image("res/characters/hero/12.png")};
-        Image[] walkLeft = {new Image("res/characters/hero/1.png"),new Image("res/characters/hero/9.png"),new Image("res/characters/hero/10.png")};
-        Image[] walkRight = {new Image("res/characters/hero/R1.png"),new Image("res/characters/hero/R2.png"),new Image("res/characters/hero/R3.png")};
-        Image[] walkDown = {new Image("res/characters/hero/0.png"),new Image("res/characters/hero/7.png"),new Image("res/characters/hero/8.png")};
-
-        movingRight = new Animation(walkRight,duration,true);
-        movingUp = new Animation(walkUp,duration,true);
-        movingLeft = new Animation(walkLeft,duration,true);
-        movingDown = new Animation(walkDown,duration,true);
-        steady = new Animation(heroSteady,duration2, true);
-        hero = steady;
-
-        boolean moreLeft= moreRight=moreUp,moreDown;
-
-        transportRealWorld= new Rectangle(310.4f,369.60f,90f,5f);
-        bed1=new Rectangle(67.6f,87.89f,68.78f,58f);
-        bed2=new Rectangle(178.3f,87.89f,68.78f,58f);
-        shelf=new Rectangle(588f,19f,64f,65f);
-        cabinet=new Rectangle(662f,19f,33f,65f);
-        table1 = new Rectangle(99f,216f,190f,31f);
-        table2 = new Rectangle(27.48f,82.39f,34f,1f);
-        pot1= new Rectangle(661.28f,245.9f,32f,24f);
-        pot2= new Rectangle(661.28f,278.39f,32f,24f);
-        window1 = new Rectangle(138f,55f,35f,1f);
-        window2 = new Rectangle(286f,55f,35f,1f);
-        window3 = new Rectangle(404f,55f,35f,1f);
-        window4 = new Rectangle(507f,55f,35f,1f);
-           */
-/*                             ==pot2=window1=window2=window3=window4;*//*
-
-    }
-    public void render(GameContainer gc, StateBasedGame sbg, Graphics g)  throws SlickException{
-        house1.draw(-5,-5,740,405);
-        hero.draw(shiftX,shiftY,heroW,heroL);
-        g.drawString("hero X position: "+shiftX+"\nhero Y position: "+shiftY,400,200);
-        g.drawString("HERO NAME: "+player.getName()+" ",100,100);
-        rHero = new Rectangle(shiftX,shiftY,heroW,heroL);
-        g.draw(rHero);
-        g.draw(transportRealWorld);
-        g.draw(bed1);
-        g.draw(bed2);
-        g.draw(shelf);
-        g.draw(cabinet);
-        g.draw(table1);
-        g.draw(table2);
-        g.draw(pot1);
-        g.draw(pot2);
-        g.draw(window1);
-        g.draw(window2);
-        g.draw(window3);
-        g.draw(window4);
-    }
-    public void update(GameContainer gc, StateBasedGame sbg, int delta)  throws SlickException{
-        Input input = gc.getInput();
-
-        if(input.isKeyDown(input.KEY_UP)){
-            hero = movingUp;
-            shiftY -= .15f;
-            if(shiftY<55f){
-                shiftY += .15f;
-            }
-        }
-        else if(input.isKeyDown(input.KEY_DOWN)){
-            hero = movingDown;
-            shiftY += .15f;
-            if(!moreDown){
-                shiftY -= .15f;
-            }
-        }
-        else if(input.isKeyDown(input.KEY_RIGHT)){
-            hero = movingRight;
-            shiftX += .15f;
-            if(shiftX>666.9f || !moreRight){
-                shiftX -= .15f;
-            }
-        }
-        else if(input.isKeyDown(input.KEY_LEFT)){
-            hero = movingLeft;
-            shiftX -= .15f;
-            if(shiftX<26.28f|| !moreLeft){
-                shiftX += .15f;
-            }
-        }
-        if(!(input.isKeyDown(input.KEY_UP)) &&!( input.isKeyDown(input.KEY_DOWN)) &&!(input.isKeyDown(input.KEY_LEFT))&&!(input.isKeyDown(input.KEY_RIGHT))){
-            hero = steady;
-        }
-        if(rHero.intersects(transportRealWorld)){
-            player.setName("Mike Gwapo Kaayu");
-            sbg.enterState(2);
-            shiftY-=7;
-        }
-
-
-*/
-/*        if(rHero.intersects(backWallLeft) || rHero.intersects(backWallRight)){
-            if(moreLeft == moreRight == moreUp == moreDown == true) {
-                if (input.isKeyDown(input.KEY_UP)) {
-                    moreUp = false;
-                } else if (input.isKeyDown(input.KEY_DOWN)) {
-                    moreDown = false;
-                } else if (input.isKeyDown(input.KEY_RIGHT)) {
-                    moreRight = false;
-                } else if (input.isKeyDown(input.KEY_LEFT)) {
-                    moreLeft = false;
-                }
-            }
-        }*//*
-
-        else{
-            moreLeft = moreRight = moreUp = moreDown = true;
-        }
-
-*/
-/*        if(rHero.intersects(transport)){
-            sbg.enterState(2);
-        }*//*
-
-
-
-    }
-    public int getID(){
-        //which screen
-        return 3;
-    }
-}
-
-*/
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -188,13 +10,11 @@ import org.newdawn.slick.state.*;
 public class House1 extends BasicGameState{
     Animation hero,steadyDown,steadyLeft,steadyRight,steadyUp, movingUp, movingDown,movingRight, movingLeft;
     boolean interaction, moreLeft, moreRight,moreUp,moreDown,subquest1,subquest2,subquest3,subquest4;
-
     Item  itable3, ibed1, ibed2, icabinet, ishelf, itable1, itable2, ipot1, ipot2, iwindow1, iwindow2, iwindow3, iwindow4;
     Char1 schnitzel;
     Hero player;
     Font font;
     TrueTypeFont ttf;
-
     Image house1,char1,textbox;
     int[] duration = {200,200,200}; // an animation is a series of frames(milliseconds)
     int[] duration2 = {1000,100,100};
@@ -204,9 +24,7 @@ public class House1 extends BasicGameState{
     float heroL = 45.0f;
     float shiftX = heroPositionX + 346.93f;
     float shiftY = heroPositionY + 312.79f;
-
     int direction;
-
     float char1PositionX = 349.17f;
     float char1PositionY = 120f;
 
@@ -221,6 +39,7 @@ public class House1 extends BasicGameState{
         String[] messages4 ={"You see some faint glimmer withing the flowers"," You reach your hand to take it..",
                 "Oh, It is a feather"};
         itable3 =new Item(messages4,1);
+
         itable2 =new Item("Mhm.. The smell of freshly picked flowers");
         String[] messages ={"The bed feels soft","Oh, but I feel something sharp inside","It looks like a feather",
                 "This must be that feather she's talking about.."," I wonder where the rest of her wings are"};
@@ -295,8 +114,8 @@ public class House1 extends BasicGameState{
         char1.draw(char1PositionX,char1PositionY,heroW,heroL+10);
         hero.draw(shiftX,shiftY,heroW,heroL);
 
-        g.drawString("hero X position: "+shiftX+"\nhero Y position: "+shiftY,400,200);
-        g.drawString("HERO NAME: "+player.getName()+" ",100,100);
+        //g.drawString("hero X position: "+shiftX+"\nhero Y position: "+shiftY,400,200);
+        //g.drawString("HERO NAME: "+player.getName()+" ",100,100);
         g.drawString("QUEST COUNTER: "+player.getCurrentQuest()+" ",300,300);
         if(subquest1) {
             g.drawString("quest1 complete \n", 200, 200);
@@ -312,7 +131,7 @@ public class House1 extends BasicGameState{
         }
         rHero = new Rectangle(shiftX,shiftY,heroW,heroL);
 
-        g.draw(rChar1);
+        /*g.draw(rChar1);
         g.draw(rHero);
         g.draw(transportRealWorld);
         g.draw(bed1);
@@ -329,7 +148,7 @@ public class House1 extends BasicGameState{
         g.draw(window3);
         g.draw(window4);
         g.draw(wall1);
-        g.draw(wall2);
+        g.draw(wall2);*/
 
         if(interaction && collidesanything()){
             textbox.draw(0,295,720,100);
@@ -520,7 +339,7 @@ public class House1 extends BasicGameState{
         }
 
         if(rHero.intersects(transportRealWorld)){
-            player.setName("Mike in House1");
+            //player.setName("Mike in House1");
             sbg.enterState(2);
             shiftY-=7;
         }

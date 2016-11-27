@@ -19,6 +19,9 @@ public class Puzzle4 extends BasicGameState{
     float heroPositionY = 9f;
     Hero player;
     Rectangle rHero;
+    Rectangle cake1,cake2,cake3,cake4,cake5,cake6,cake7,cake8,cake9;
+    Rectangle sword1,sword2,sword3,sword4,sword5,sword6,sword7,sword8,sword9,sword10,sword11;
+    Rectangle meat1,meat2,meat3;
     private TiledMap cave4;
     Camera camera;
     private static final float SPEEDOBJ = 0.025f;
@@ -70,6 +73,31 @@ public class Puzzle4 extends BasicGameState{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        cake1 = new Rectangle(0,0,0,0);
+        cake2 = new Rectangle(0,0,0,0);
+        cake3 = new Rectangle(0,0,0,0);
+        cake4 = new Rectangle(0,0,0,0);
+        cake5 = new Rectangle(0,0,0,0);
+        cake6 = new Rectangle(0,0,0,0);
+        cake7 = new Rectangle(0,0,0,0);
+        cake8 = new Rectangle(0,0,0,0);
+        cake9 = new Rectangle(0,0,0,0);
+        sword1 = new Rectangle(0,0,0,0);
+        sword2 = new Rectangle(0,0,0,0);
+        sword3 = new Rectangle(0,0,0,0);
+        sword4 = new Rectangle(0,0,0,0);
+        sword5 = new Rectangle(0,0,0,0);
+        sword6 = new Rectangle(0,0,0,0);
+        sword7 = new Rectangle(0,0,0,0);
+        sword8 = new Rectangle(0,0,0,0);
+        sword9 = new Rectangle(0,0,0,0);
+        sword10 = new Rectangle(0,0,0,0);
+        sword11 = new Rectangle(0,0,0,0);
+        meat1 = new Rectangle(0,0,0,0);
+        meat2 = new Rectangle(0,0,0,0);
+        meat3 = new Rectangle(0,0,0,0);
+        rHero = new Rectangle(0,15,0,0);
+
         up1 = down2= false;
         down1 = up2 = true;
         hp = new Image("res/background/puzzle1/FOOD/heart.png");
@@ -106,7 +134,31 @@ public class Puzzle4 extends BasicGameState{
         hero.draw(heroPositionX * 32,heroPositionY * 32);
         camera.drawMap(3);
         camera.drawMap(4);
+        cake1 = new Rectangle(moveX1 * 32,moveY * 32,25,25);
+        cake2 = new Rectangle(moveX1 * 32,moveY2 * 32,25,25);
+        cake3 = new Rectangle(moveX3 * 32,moveY * 32,25,25);
+        cake4 = new Rectangle(moveX5 * 32,moveY2 * 32,25,25);
+        cake5 = new Rectangle(moveX5 * 32,moveY * 32,25,25);
+        cake6 = new Rectangle(moveX7 * 32,moveY * 32,25,25);
+        cake7 = new Rectangle(moveX9 * 32,moveY * 32,25,25);
+        cake8 = new Rectangle(moveX10 * 32,moveY2 * 32,25,25);
+        cake9 = new Rectangle(moveX4 * 32,moveY2 * 32,25,25);
 
+        sword1 = new Rectangle(moveX2 * 32,moveY *32, 25,25);
+        sword2 = new Rectangle(moveX4 * 32,moveY *32, 25,25);
+        sword3 = new Rectangle(moveX4 * 32,moveY2 *32, 25,25);
+        sword4 = new Rectangle(moveX6 * 32,moveY *32, 25,25);
+        sword5 = new Rectangle(moveX8 * 32,moveY *32, 25,25);
+        sword6 = new Rectangle(moveX10 * 32,moveY *32, 25,25);
+        sword7 = new Rectangle(moveX13 * 32,moveY *32, 25,25);
+        sword8 = new Rectangle(moveX9 * 32,moveY2 *32, 25,25);
+        sword9 = new Rectangle(moveX7 * 32,moveY2 *32, 25,25);
+        sword10 = new Rectangle(moveX6 * 32,moveY2 *32, 25,25);
+        sword10 = new Rectangle(moveX3 * 32,moveY2 *32, 25,25);
+
+        meat1 = new Rectangle(moveX13 * 32, moveY * 32,25,25);
+        meat2 = new Rectangle(moveX12 * 32, moveY * 32,25,25);
+        meat3 = new Rectangle(moveX11 * 32, moveY * 32,25,25);
         cakes.draw(moveX1 * 32, moveY * 32);
         cakes.draw(moveX1 * 32, moveY2 * 32);
         meats.draw(moveX13 * 32, moveY * 32);
@@ -130,6 +182,29 @@ public class Puzzle4 extends BasicGameState{
         swords.draw(moveX7 * 32, moveY2 * 32);
         swords.draw(moveX6 * 32, moveY2 * 32);
         swords.draw(moveX3 * 32, moveY2 * 32);
+        g.draw(cake1);
+        g.draw(cake2);
+        g.draw(cake3);
+        g.draw(cake4);
+        g.draw(cake5);
+        g.draw(cake6);
+        g.draw(cake7);
+        g.draw(cake8);
+        g.draw(cake9);
+        g.draw(sword1);
+        g.draw(sword2);
+        g.draw(sword3);
+        g.draw(sword4);
+        g.draw(sword5);
+        g.draw(sword6);
+        g.draw(sword7);
+        g.draw(sword8);
+        g.draw(sword9);
+        g.draw(sword10);
+        g.draw(sword11);
+        g.draw(meat1);
+        g.draw(meat2);
+        g.draw(meat3);
 
         if(player.getHp() >= 1)
             hp.draw(3 * TILESIZE,12 * TILESIZE,20,15);
@@ -142,7 +217,7 @@ public class Puzzle4 extends BasicGameState{
             hp.draw(6 * TILESIZE,12 * TILESIZE,20,15);
         if(player.getHp() == 5)
             hp.draw(7 * TILESIZE,12 * TILESIZE,20,15);
-        g.drawString("Health: ", 1 * TILESIZE, 11.5f * TILESIZE);
+        g.drawString("Health: ", 1 * TILESIZE, 11.8f * TILESIZE);
         g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
         g.drawString("HERO NAME: "+player.getName()+" ",100,100);
     }

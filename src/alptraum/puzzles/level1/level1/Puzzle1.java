@@ -20,44 +20,53 @@ package alptraum.puzzles.level1.level1;
 
     //TODO adding saving points
 
-
 **/
+
+
 //newly added function in hero is checkDamage please check
-import alptraum.Health;
-import alptraum.Hero;
+import alptraum.*;
 import org.newdawn.slick.*;
+import java.awt.Font;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.tiled.TiledMap;
-import alptraum.Camera;
 
 public class Puzzle1 extends BasicGameState{
     Animation hero,steady, movingUp, movingDown,movingRight, movingLeft;
     private TiledMap cave1;
     private static final int TILEWIDTH = 32;
     private static final int TILEHEIGHT = 32;
-
     int[] duration = {200,200,200}; // an animation is a series of frames(milliseconds)
     int[] duration2 = {1000,100,100};
+    Animation ghost;
+    Ghost rensarrews;
+
+    private float ghostPositionX = 17;
+    private float ghostPositionY = 4;
     private float heroPositionX = 20f;      // keep track of position of hero
     private float heroPositionY = 10f;
-    private boolean nowUp,nowDown, nowRight,nowLeft;
     float heroW = 20.0f;
     float heroL = 27.0f;
     Hero player;
     Camera camera;
+    Font font;
+    TrueTypeFont ttf;
+
     //Health health;
     private boolean[][] blocked;
+    private boolean start;
     private static final int NUMBEROFLAYERS = 6;
     private static final float SPEED = 0.0025f;
+    private boolean interaction;
    //boolean moreleft,moreright,moreUp,moreDown;
-    Rectangle rHero;
-    Rectangle weapon1,weapon2,weapon3,weapon4;
-    Image swords;
-    Image hp;
+    private Rectangle rHero;
+    private Rectangle weapon1,weapon2,weapon3,weapon4, ghost1;
+    private Image swords;
+    private Image hp,textbox;
     private float swordMovementX = 3f;
     private float swordMovementY = 6f;
     private float swordMovementX1 = 7f;
@@ -66,8 +75,7 @@ public class Puzzle1 extends BasicGameState{
     private float swordMovementY2 = 5f;
     private float swordMovementX3 = 3f;
     private float swordMovementY3 = 4f;
-
-    boolean diagdown, diagup, up1, down1, right,left;
+    private boolean diagdown, diagup, up1, down1, right,left;
 
     public Puzzle1(int state, Hero player) throws SlickException{
         this.player = player;
@@ -99,30 +107,37 @@ public class Puzzle1 extends BasicGameState{
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        ghost1 = new Rectangle(0,0,0,0);
         weapon1 = new Rectangle(0,0,0,0);
         weapon2 = new Rectangle(0,0,0,0);
         weapon3 = new Rectangle(0,0,0,0);
         weapon4 = new Rectangle(0,0,0,0);
         rHero = new Rectangle(15,0,heroW,heroL);
-
-        nowDown = nowLeft = nowRight = nowUp = false;
+        start = true;
         right = down1 = true;
-        up1 = left = false;
+        interaction = up1 = left = false;
 
+        rensarrews = new Ghost();
+        font = new Font("Century Gothic", Font.BOLD,20);
+        ttf = new TrueTypeFont(font,true);
+
+        textbox = new Image("res/etc/textbox1.png");
         cave1 = new TiledMap("res/background/puzzle1/Cave1part2Final.tmx", "res/background/puzzle1");
         swords = new Image("res/background/puzzle1/FOOD/Sword.png");
         hp = new Image("res/background/puzzle1/FOOD/heart.png");
-
         diagdown = false;
         diagup = true;
         blocked = new boolean[cave1.getWidth()][cave1.getHeight()];
+
         initializeBlocked();
+        Image[] ghostSteady = {new Image("res/characters/Ghost/0.png"),new Image("res/characters/Ghost/2.png"),new Image("res/characters/Ghost/left.png")};
         Image[] heroSteady = {new Image("res/characters/hero/0.png"),new Image("res/characters/hero/3.png"),new Image("res/characters/hero/4.png")};
         Image[] walkUp = {new Image("res/characters/hero/2.png"),new Image("res/characters/hero/11.png"),new Image("res/characters/hero/12.png")};
         Image[] walkLeft = {new Image("res/characters/hero/1.png"),new Image("res/characters/hero/9.png"),new Image("res/characters/hero/10.png")};
         Image[] walkRight = {new Image("res/characters/hero/R1.png"),new Image("res/characters/hero/R2.png"),new Image("res/characters/hero/R3.png")};
         Image[] walkDown = {new Image("res/characters/hero/0.png"),new Image("res/characters/hero/7.png"),new Image("res/characters/hero/8.png")};
 
+        ghost = new Animation(ghostSteady,duration,true);
         movingRight = new Animation(walkRight,duration,true);
         movingUp = new Animation(walkUp,duration,true);
         movingLeft = new Animation(walkLeft,duration,true);
@@ -138,6 +153,7 @@ public class Puzzle1 extends BasicGameState{
         camera.drawMap(2);
         camera.drawMap(3);
         camera.drawMap(5);
+        ghost.draw(ghostPositionX * 32, ghostPositionY * 32);
         hero.draw(heroPositionX * TILEWIDTH, heroPositionY * TILEHEIGHT);
         camera.drawMap(4);
 
@@ -146,17 +162,17 @@ public class Puzzle1 extends BasicGameState{
         swords.draw(swordMovementX2 * 32,swordMovementY2 * 32);
         swords.draw(swordMovementX3 * 32,swordMovementY3 * 32);
         //player HP
-
         weapon1 = new Rectangle(swordMovementX * 32, swordMovementY * 32, 25,25);
         weapon2 = new Rectangle(swordMovementX1 * 32, swordMovementY1 * 32,25,25);
         weapon3 = new Rectangle(swordMovementX2 * 32, swordMovementY2 * 32,25,25);
         weapon4 = new Rectangle(swordMovementX3 * 32, swordMovementY3 * 32,25,25);
+        ghost1 = new Rectangle(ghostPositionX * 32, (ghostPositionY + 0.4f)* 32,25,25);
 
+        g.draw(ghost1);
         if(player.getHp() >= 1)
             hp.draw(3 * TILEWIDTH,12 * TILEHEIGHT,20,15);
-        if(player.getHp() >= 2) {
+        if(player.getHp() >= 2)
             hp.draw(4 * TILEWIDTH, 12 * TILEHEIGHT, 20, 15);
-        }
         if(player.getHp() >= 3)
             hp.draw(5 * TILEWIDTH,12 * TILEHEIGHT,20,15);
         if(player.getHp() >= 4)
@@ -168,17 +184,50 @@ public class Puzzle1 extends BasicGameState{
         g.draw(weapon2);
         g.draw(weapon3);
         g.draw(weapon4);
-
         rHero = new Rectangle(heroPositionX * TILEWIDTH - 1,heroPositionY * TILEHEIGHT,heroW,heroL);
+
         g.draw(rHero);
         g.drawString("HEALTH: ", 1 * TILEWIDTH, 11.8f * TILEHEIGHT);
         g.drawString("hero X position: "+heroPositionX+"\nhero Y position: "+heroPositionY,400,200);
         g.drawString("HERO NAME: "+player.getName()+" ",100,100);
+
+        if(start){
+            if(rensarrews.getMessages() != 5) {
+
+                if(rensarrews.getMessages() == 2 || rensarrews.getMessages() == 1){
+                    rensarrews.getImage(1).draw(19 * TILEWIDTH,6 * TILEHEIGHT, 2.75f);
+                } else if(rensarrews.getMessages() == 4){
+                    rensarrews.getImage(2).draw(19 * TILEWIDTH,6 * TILEHEIGHT, 2.75f);
+                } else {
+                    rensarrews.getImage(0).draw(19 * TILEWIDTH,6 * TILEHEIGHT, 2.75f);
+                }
+
+                textbox.draw(0, 9 * TILEHEIGHT, 720, 115);
+                ttf.drawString(3 * TILEWIDTH, 10 * TILEHEIGHT, rensarrews.Interact(rensarrews.getMessages()), org.newdawn.slick.Color.white);
+
+            } else {
+                rensarrews.setCtrMessages(4);
+                start = false;
+            }
+        }
+
+        if(interaction){
+            if(rensarrews.getMessages() <= 9) {
+                if (rensarrews.getMessages() == 7 || rensarrews.getMessages() == 9) {
+                    rensarrews.getImage(2).draw(19 * TILEWIDTH, 6 * TILEHEIGHT, 2.75f);
+
+                } else {
+                    rensarrews.getImage(0).draw(19 * TILEWIDTH, 6 * TILEHEIGHT, 2.75f);
+                }
+
+                textbox.draw(0, 9 * TILEHEIGHT, 720, 115);
+                ttf.drawString(3 * TILEWIDTH, 10 * TILEHEIGHT, rensarrews.Interact(rensarrews.getMessages()), org.newdawn.slick.Color.white);
+            }
+        }
     }
 
     private void moveSword(int delta){
         //sword1
-
         if((int) swordMovementY == 6 && (int) swordMovementX != 6) {
             swordMovementX += delta * 0.004f;
         }else if((int) swordMovementX == 6 && (int) swordMovementY != 9) {
@@ -221,42 +270,56 @@ public class Puzzle1 extends BasicGameState{
         }
     }
 
-
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input input = gc.getInput();
         moveSword(delta);
-        System.out.println(player.getHp() + " mao ni si HP");
 
-        if (input.isKeyDown(Input.KEY_UP)) {
-            movingUp.update(delta);
-            hero = movingUp;
-            if(!isBlocked(heroPositionX, heroPositionY + delta * SPEED - 0.1f)){
-                heroPositionY -= delta * SPEED;
+        if(start) {
+            if (input.isKeyPressed(Input.KEY_I)) {
+                rensarrews.addMessage();
             }
         }
-        else if (input.isKeyDown(Input.KEY_DOWN)) {
-            movingDown.update(delta);
-            hero = movingDown;
-            if(!isBlocked(heroPositionX, heroPositionY + delta * SPEED + 0.1f)){
-                heroPositionY += delta * SPEED;
+        else {
+            if (rHero.intersects(ghost1)) {
+                if(rensarrews.getMessages() > 9){
+                    rensarrews.setCtrMessages(4);
+                    interaction = false;
+                }
+
+                if (input.isKeyPressed(Input.KEY_I)) {
+                    interaction = true;
+                    rensarrews.addMessage();
+                }
+
             }
-        }
-        else if (input.isKeyDown(Input.KEY_LEFT)) {
-            movingLeft.update(delta);
-            hero = movingLeft;
-            if (!isBlocked(heroPositionX - delta * SPEED - 0.1f, heroPositionY )) {
-                heroPositionX -=  delta * SPEED;
+            if (input.isKeyDown(Input.KEY_UP)) {
+                movingUp.update(delta);
+                hero = movingUp;
+                if (!isBlocked(heroPositionX, heroPositionY + delta * SPEED - 0.1f)) {
+                    heroPositionY -= delta * SPEED;
+                }
+            } else if (input.isKeyDown(Input.KEY_DOWN)) {
+                movingDown.update(delta);
+                hero = movingDown;
+                if (!isBlocked(heroPositionX, heroPositionY + delta * SPEED + 0.1f)) {
+                    heroPositionY += delta * SPEED;
+                }
+            } else if (input.isKeyDown(Input.KEY_LEFT)) {
+                movingLeft.update(delta);
+                hero = movingLeft;
+                if (!isBlocked(heroPositionX - delta * SPEED - 0.1f, heroPositionY)) {
+                    heroPositionX -= delta * SPEED;
+                }
+            } else if (input.isKeyDown(Input.KEY_RIGHT)) {
+                movingRight.update(delta);
+                hero = movingRight;
+                if (!isBlocked(heroPositionX + delta * SPEED + 0.4f, heroPositionY)) {
+                    heroPositionX += delta * SPEED;
+                }
+            } else {
+                hero = steady;
             }
-        }
-        else if (input.isKeyDown(Input.KEY_RIGHT)) {
-            movingRight.update(delta);
-            hero = movingRight;
-            if (!isBlocked(heroPositionX + delta * SPEED + 0.4f, heroPositionY)){
-                heroPositionX += delta * SPEED;
-            }
-        } else {
-            hero = steady;
         }
 
         if(((int) heroPositionX >= 3 && (int) heroPositionX <= 5) && (int) heroPositionY == 0){

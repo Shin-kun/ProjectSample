@@ -52,5 +52,4 @@ public class Char1 extends Character{
             return images[i];
         }
     }
-
 }

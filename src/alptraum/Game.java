@@ -57,7 +57,7 @@ public class Game extends StateBasedGame{
         //need to give a background
         //this.getState(MENU).init(gc,this);
         //this.getState(PLAY).init(gc,this);
-        //this.getState(REALWORLD).init(gc,this);
+        this.getState(REALWORLD).init(gc,this);
         //this.getState(HOUSE1).init(gc,this);
         //this.getState(HOUSE2).init(gc,this);
         //this.getState(HOUSE3).init(gc,this);
@@ -71,7 +71,7 @@ public class Game extends StateBasedGame{
         this.getState(SECROOM).init(gc,this);
         this.getState(PUZZLE7).init(gc,this);
         this.getState(PUZZLE8).init(gc,this);
-        this.enterState(PUZZLE5);          //first needed to show
+        this.enterState(PUZZLE2);          //first needed to show
     }
 
     public static void main(String[] args){

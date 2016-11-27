@@ -63,7 +63,7 @@ public class SecretRoom extends BasicGameState{
         secretRoom = new TiledMap("res/background/puzzle1/Cave1Part3Final.tmx", "res/background/puzzle1");
         blocked = new boolean[secretRoom.getWidth()][secretRoom.getHeight()];
         initializeBlocked();
-
+        hp = new Image("res/background/puzzle1/FOOD/heart.png");
         Image[] heroSteady = {new Image("res/characters/hero/0.png"),new Image("res/characters/hero/3.png"),new Image("res/characters/hero/4.png")};
         Image[] walkUp = {new Image("res/characters/hero/2.png"),new Image("res/characters/hero/11.png"),new Image("res/characters/hero/12.png")};
         Image[] walkLeft = {new Image("res/characters/hero/1.png"),new Image("res/characters/hero/9.png"),new Image("res/characters/hero/10.png")};

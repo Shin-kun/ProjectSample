@@ -115,7 +115,7 @@
    <property name="blocked" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYGiAGFbsbGoANRYEW5kFt7pRMHAAALWsW96sBAAA
+   H4sIAAAAAAAAC2NgGAVDDcSwDrQLBgYg+5vaYaDGgmArs+BWNwoGDgAAoq5hX6wEAAA=
   </data>
  </layer>
  <layer name="Wall2" width="23" height="13">

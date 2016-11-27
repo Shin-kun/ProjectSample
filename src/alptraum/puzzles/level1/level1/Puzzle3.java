@@ -38,7 +38,10 @@ public class Puzzle3 extends BasicGameState {
     private float cake1Y = 3f;
     private  float heroW = 20.0f;
     private  float heroL = 27.0f;
-    private Rectangle meat1,meat2,meat3,meat4,meat5,cake;
+    private Rectangle meat1,meat2,meat3,meat4,meat5,cake,rock;
+    private boolean hit;
+    private float cakeposX;
+    boolean direction1, direction2, direction3, direction4;
 
     // Rectangles in order to determine whether the character hits them or not
 
@@ -109,6 +112,7 @@ public class Puzzle3 extends BasicGameState {
         steady = new Animation(heroSteady,duration2, true);
         hero = steady;
         camera = new Camera(container,cave3);
+
     }
 
     @Override
